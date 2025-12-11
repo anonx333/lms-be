@@ -1,0 +1,125 @@
+@rootURL = http://localhost:3000
+@apiEP = {{rootURL}}/api/v1
+@adminEP = {{apiEP}}/admin
+@authEP = {{apiEP}}/auth
+@userEP = {{apiEP}}/users
+@bookEP = {{apiEP}}/books
+@borrowEP = {{apiEP}}/borrows
+@reviewEP = {{apiEP}}/reviews
+
+
+###
+POST {{authEP}}/register
+Content-Type: application/json
+
+{
+    "fName": "prem",
+    "lName": "presfdsm",
+    "phone": "34567",
+    "email": "asdf2@sdfc.com",
+    "password": "sdfdsf"
+}
+
+###
+POST {{authEP}}/login
+Content-Type: application/json
+
+{
+    "email" : "asdf2@sdfc.com",
+    "password" : "sdfdsf"
+}
+
+### renew jwt
+GET {{authEP}}/renew-jwt
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGYyQHNkZmMuY29tIiwiaWF0IjoxNzYyMzg1Njk4LCJleHAiOjE3NjQ5Nzc2OTh9.USVnKQN8QYy_Nt49ydiSeyy-7EKb9uHPdjVPIzoSZhM
+
+### user detail api
+GET {{authEP}}/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGYyQHNkZmMuY29tIiwiaWF0IjoxNzY0MTExMzg1LCJleHAiOjE3NjQxOTc3ODV9.MaV9ufzH3ncxv_BwvOA5OQ9oojq40WsjRScuCKaTVZQ
+
+###
+GET {{bookEP}}
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGYyQHNkZmMuY29tIiwiaWF0IjoxNzYyMzg1NzQzLCJleHAiOjE3NjIzODU3NzN9.asujqQpPhmuw5BPlLHiOuvlHU_Et3Cxl4zRzmk2jzlo
+
+
+###
+GET {{authEP}}/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGYyQHNkZmMuY29tIiwiaWF0IjoxNzYyOTg4MjgwLCJleHAiOjE3NjMwNzQ2ODB9.aABxJ2brtLhnFaguICvZZhi1Yc_SNDbMmL_G5Mlkn4A
+
+
+###
+GET {{userEP}}
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGYyQHNkZmMuY29tIiwiaWF0IjoxNzY0MTExMTc4LCJleHAiOjE3NjQxOTc1Nzh9.8qral5w3uBPZ0U8HHeaqRxx1tOkJ-JwrdaZThpEjTZo
+
+### public books
+GET {{bookEP}}/public
+
+### all books
+GET {{bookEP}}?sort=title
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGYyQHNkZmMuY29tIiwiaWF0IjoxNzY0NzE5NDc2LCJleHAiOjE3NjQ4MDU4NzZ9.pxyX2fxJhzwqnI2W-vrxD1PlE0E4V4BeUCOIHS7MMrI
+
+### book apis
+POST {{bookEP}}
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGYyQHNkZmMuY29tIiwiaWF0IjoxNzYyOTg4MjgwLCJleHAiOjE3NjMwNzQ2ODB9.aABxJ2brtLhnFaguICvZZhi1Yc_SNDbMmL_G5Mlkn4A
+Content-Type: application/json
+
+{
+    "title": "BOOK_TITLE",
+    "author": "AUTHOR",
+    "isbn": "ISBN2",
+    "publishedYear": 1990,
+    "thumbnail": "THUMBNAIL",
+    "description": "BOOK_DESCRIPTION"
+}
+
+### make book active
+PATCH {{bookEP}}/691519e7c439395fecc9399b
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGYyQHNkZmMuY29tIiwiaWF0IjoxNzYyOTg4MjgwLCJleHAiOjE3NjMwNzQ2ODB9.aABxJ2brtLhnFaguICvZZhi1Yc_SNDbMmL_G5Mlkn4A
+Content-Type: application/json
+
+{
+    "status" : "active"
+}
+
+### borrow book
+POST {{borrowEP}}/691519e7c439395fecc9399b
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGYyQHNkZmMuY29tIiwiaWF0IjoxNzY0MTExMTc4LCJleHAiOjE3NjQxOTc1Nzh9.8qral5w3uBPZ0U8HHeaqRxx1tOkJ-JwrdaZThpEjTZo
+
+### get my borrows
+GET {{borrowEP}}
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGYyQHNkZmMuY29tIiwiaWF0IjoxNzY0MTExMTc4LCJleHAiOjE3NjQxOTc1Nzh9.8qral5w3uBPZ0U8HHeaqRxx1tOkJ-JwrdaZThpEjTZo
+
+
+### return book
+POST {{borrowEP}}/6915525e2ece30e9be5d25ec/return
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGYyQHNkZmMuY29tIiwiaWF0IjoxNzYyOTg4MjgwLCJleHAiOjE3NjMwNzQ2ODB9.aABxJ2brtLhnFaguICvZZhi1Yc_SNDbMmL_G5Mlkn4A
+
+### leave a review
+POST {{reviewEP}}/6915525e2ece30e9be5d25ec
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGYyQHNkZmMuY29tIiwiaWF0IjoxNzYyOTg4MjgwLCJleHAiOjE3NjMwNzQ2ODB9.aABxJ2brtLhnFaguICvZZhi1Yc_SNDbMmL_G5Mlkn4A
+Content-Type: application/json
+
+{
+    "title" : "REVIEW NEW REVIEW",
+    "description" : "REVIEW 1 Description",
+    "rating" : 1
+}
+
+### list my reviews
+GET {{reviewEP}}
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGYyQHNkZmMuY29tIiwiaWF0IjoxNzYyOTg4MjgwLCJleHAiOjE3NjMwNzQ2ODB9.aABxJ2brtLhnFaguICvZZhi1Yc_SNDbMmL_G5Mlkn4A
+
+### list all reviews
+GET {{reviewEP}}/all
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGYyQHNkZmMuY29tIiwiaWF0IjoxNzYyOTg4MjgwLCJleHAiOjE3NjMwNzQ2ODB9.aABxJ2brtLhnFaguICvZZhi1Yc_SNDbMmL_G5Mlkn4A
+
+### active a review
+PATCH {{reviewEP}}/69267b7bfa59dcbdebbeed33
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGYyQHNkZmMuY29tIiwiaWF0IjoxNzY0MTI0Mjk4LCJleHAiOjE3NjQyMTA2OTh9.Zzt-SxUSOdHr-Ua5fpRZrpGqoedwk32fNIA-SiXhy60
+Content-Type: application/json
+
+{
+    "status" : "active"
+}
+
+### delete a review

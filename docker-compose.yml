@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  nodejs:
+    build: .
+    ports:
+      - 5000:5000
+    environment:
+      - PORT=5000
+      - MONGO_URL=mongodb://mongo:27017/lms-db
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27018:27017

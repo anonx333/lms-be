@@ -1,0 +1,377 @@
+{
+  "info": {
+    "_postman_id": "library-api-collection-2025",
+    "name": "Library Management API",
+    "description": "Complete Postman collection for your Node.js/MongoDB library app (auth, books, borrows, reviews)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"fName\": \"prem\",\n    \"lName\": \"presfdsm\",\n    \"phone\": \"34567\",\n    \"email\": \"asdf2@sdfc.com\",\n    \"password\": \"sdfdsf\"\n}"
+            },
+            "url": {
+              "raw": "{{authEP}}/register",
+              "host": ["{{authEP}}"],
+              "path": ["register"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\" : \"asdf2@sdfc.com\",\n    \"password\" : \"sdfdsf\"\n}"
+            },
+            "url": {
+              "raw": "{{authEP}}/login",
+              "host": ["{{authEP}}"],
+              "path": ["login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Renew JWT",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{authEP}}/renew-jwt",
+              "host": ["{{authEP}}"],
+              "path": ["renew-jwt"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{authEP}}/users",
+              "host": ["{{authEP}}"],
+              "path": ["users"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Books",
+      "item": [
+        {
+          "name": "Get All Books (Authenticated)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{bookEP}}",
+              "host": ["{{bookEP}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Public Books",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{bookEP}}/public",
+              "host": ["{{bookEP}}"],
+              "path": ["public"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create New Book (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"BOOK_TITLE\",\n    \"author\": \"AUTHOR\",\n    \"isbn\": \"ISBN2\",\n    \"publishedYear\": 1990,\n    \"thumbnail\": \"THUMBNAIL\",\n    \"description\": \"BOOK_DESCRIPTION\"\n}"
+            },
+            "url": {
+              "raw": "{{bookEP}}",
+              "host": ["{{bookEP}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Activate Book (Admin)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"status\" : \"active\"\n}"
+            },
+            "url": {
+              "raw": "{{bookEP}}/:bookId",
+              "host": ["{{bookEP}}"],
+              "path": [":bookId"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Borrows",
+      "item": [
+        {
+          "name": "Borrow a Book",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{borrowEP}}/:bookId",
+              "host": ["{{borrowEP}}"],
+              "path": [":bookId"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Borrows",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{borrowEP}}",
+              "host": ["{{borrowEP}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Return Book",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{borrowEP}}/:borrowId/return",
+              "host": ["{{borrowEP}}"],
+              "path": [":borrowId", "return"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reviews",
+      "item": [
+        {
+          "name": "Leave a Review",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\" : \"REVIEW NEW REVIEW\",\n    \"description\" : \"REVIEW 1 Description\",\n    \"rating\" : 1\n}"
+            },
+            "url": {
+              "raw": "{{reviewEP}}/:bookId",
+              "host": ["{{reviewEP}}"],
+              "path": [":bookId"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "My Reviews",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{reviewEP}}",
+              "host": ["{{reviewEP}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "All Reviews (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{reviewEP}}/all",
+              "host": ["{{reviewEP}}"],
+              "path": ["all"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Activate Review (Admin)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"status\" : \"active\"\n}"
+            },
+            "url": {
+              "raw": "{{reviewEP}}/:reviewId",
+              "host": ["{{reviewEP}}"],
+              "path": [":reviewId"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{jwt_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "rootURL",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "apiEP",
+      "value": "{{rootURL}}/api/v1"
+    },
+    {
+      "key": "authEP",
+      "value": "{{apiEP}}/auth"
+    },
+    {
+      "key": "userEP",
+      "value": "{{apiEP}}/users"
+    },
+    {
+      "key": "bookEP",
+      "value": "{{apiEP}}/books"
+    },
+    {
+      "key": "borrowEP",
+      "value": "{{apiEP}}/borrows"
+    },
+    {
+      "key": "reviewEP",
+      "value": "{{apiEP}}/reviews"
+    },
+    {
+      "key": "jwt_token",
+      "value": "",
+      "description": "Paste your JWT here after login"
+    }
+  ]
+}
